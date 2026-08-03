@@ -1,6 +1,6 @@
 # Product Requirements Document (PRD)
 
-**Product Name:** LUMIÈRE Cafe POS System
+**Product Name:** NADOYO Cafe POS System
 **Version:** 2.0.0
 **Date:** August 2026
 **Author:** Nadoyo
@@ -9,7 +9,7 @@
 
 ## 1. Executive Summary
 
-LUMIÈRE is an enterprise-grade, full-stack web-based Point of Sale (POS) and restaurant management platform purpose-built for artisanal cafes, specialty coffee shops, and boutique restaurants. The system delivers end-to-end operations management — from customer self-service digital ordering and cashier POS transactions, through real-time kitchen display (KDS) order tracking, to comprehensive financial analytics and inventory management.
+NADOYO is an enterprise-grade, full-stack web-based Point of Sale (POS) and restaurant management platform purpose-built for artisanal cafes, specialty coffee shops, and boutique restaurants. The system delivers end-to-end operations management — from customer self-service digital ordering and cashier POS transactions, through real-time kitchen display (KDS) order tracking, to comprehensive financial analytics and inventory management.
 
 The platform runs as a containerised Docker Compose stack comprising four services: a Vue 3 SPA frontend served via Nginx, a Node.js/Express REST API backend, PostgreSQL 15 for persistent data, and Redis 7 for high-performance caching.
 

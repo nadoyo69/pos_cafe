@@ -1,4 +1,4 @@
-# ☕ LUMIÈRE — Artisanal Cafe POS & Management Platform
+# ☕ NADOYO — Artisanal Cafe POS & Management Platform
 
 <div align="center">
 
@@ -37,7 +37,7 @@ Built with **Vue 3** · **Node.js/Express** · **PostgreSQL 15** · **Redis 7** 
 
 ## 🌟 Overview
 
-LUMIÈRE is an enterprise-grade, full-stack web-based POS and restaurant management platform purpose-built for artisanal cafes, specialty coffee shops, and boutique restaurants. It provides end-to-end operations management:
+NADOYO is an enterprise-grade, full-stack web-based POS and restaurant management platform purpose-built for artisanal cafes, specialty coffee shops, and boutique restaurants. It provides end-to-end operations management:
 
 - 📱 **Customer self-service** digital ordering (mobile-friendly)
 - 💳 **Cashier POS terminal** with dynamic per-product addons
@@ -245,90 +245,90 @@ npm run dev    # Starts on http://localhost:5173 with HMR
 
 ## 💾 Data Persistence & Database Management
 
-### ✅ Data Aman Saat Update & Rebuild
+### ✅ Data is Safe During Updates & Rebuilds
 
-Database PostgreSQL dan Redis cache menggunakan **Docker Named Volumes** (`postgres_data`, `redis_data`). Ini berarti:
+PostgreSQL and Redis use **Docker Named Volumes** (`postgres_data`, `redis_data`). This means your data persists across container lifecycle operations:
 
-| Perintah | Data Aman? | Penjelasan |
-|----------|-----------|------------|
-| `docker compose up -d --build` | ✅ **Ya** | Hanya rebuild image & restart container. Volume data tidak tersentuh. |
-| `docker compose down` | ✅ **Ya** | Stop & hapus container, tapi **volume tetap tersimpan**. |
-| `docker compose restart` | ✅ **Ya** | Restart container tanpa menghapus apapun. |
-| `docker compose stop` | ✅ **Ya** | Stop container tanpa menghapus apapun. |
-| `docker compose down -v` | ❌ **Tidak** | Menghapus volume → **semua data hilang**. |
-| `./scripts/reset-db.sh` | ❌ **Tidak** | Script reset sengaja menghapus semua data. |
+| Command | Data Safe? | Explanation |
+|---------|-----------|-------------|
+| `docker compose up -d --build` | ✅ **Yes** | Only rebuilds images & restarts containers. Data volumes are untouched. |
+| `docker compose down` | ✅ **Yes** | Stops & removes containers, but **volumes are preserved**. |
+| `docker compose restart` | ✅ **Yes** | Restarts containers without removing anything. |
+| `docker compose stop` | ✅ **Yes** | Stops containers without removing anything. |
+| `docker compose down -v` | ❌ **No** | Removes volumes → **all data is deleted**. |
+| `./scripts/reset-db.sh` | ❌ **No** | Reset script intentionally destroys all data. |
 
-> **Kesimpulan:** Untuk update kode / rebuild image, cukup jalankan `docker compose up -d --build`. Semua data (produk, pesanan, pengguna, setting, dll.) akan **tetap aman dan tersimpan**.
+> **Summary:** To update code or rebuild images, simply run `docker compose up -d --build`. All data (products, orders, users, settings, etc.) will **remain safe and persisted**.
 
-### Rebuild Setelah Perubahan Kode
+### Rebuild After Code Changes
 
 ```bash
-# Aman — data tetap tersimpan
+# Safe — data remains persisted
 docker compose up -d --build
 ```
 
-### Stop Semua Service (Data Tetap Aman)
+### Stop All Services (Data Remains Safe)
 
 ```bash
-# Stop saja (container tetap ada)
+# Stop only (containers remain)
 docker compose stop
 
-# Atau stop + hapus container (data volume tetap aman)
+# Or stop + remove containers (data volumes remain safe)
 docker compose down
 ```
 
-### ⚠️ Reset Database dari Awal (Hapus Semua Data)
+### ⚠️ Full Database Reset (Destroys All Data)
 
-Jika ingin **menghapus semua data dan memulai dari nol**, gunakan script reset khusus:
+To **delete all data and start from scratch**, use the dedicated reset script:
 
 ```bash
-# Beri izin eksekusi (sekali saja)
+# Grant execute permission (one-time only)
 chmod +x scripts/reset-db.sh
 
-# Jalankan reset
+# Run the reset
 ./scripts/reset-db.sh
 ```
 
-Script ini akan:
-1. Menghentikan semua container
-2. Menghapus volume database PostgreSQL dan Redis cache
-3. Rebuild semua container dari awal
-4. Menunggu database selesai inisialisasi
+The script will:
+1. Stop all running containers
+2. Remove PostgreSQL database and Redis cache volumes
+3. Rebuild all containers from scratch
+4. Wait for database initialisation to complete
 
-> ⚠️ **PERINGATAN:** Script ini akan **menghapus permanen** semua data: pesanan, produk, kategori, pengguna, inventori, diskon, setting, shift, dan audit log. Tidak bisa di-undo!
+> ⚠️ **WARNING:** This script will **permanently delete** all data: orders, products, categories, users, inventory, discounts, settings, shifts, and audit logs. This action cannot be undone!
 
-Atau, jika ingin reset manual tanpa script:
+Alternatively, to reset manually without the script:
 
 ```bash
-# Manual reset (HAPUS SEMUA DATA)
+# Manual reset (DELETES ALL DATA)
 docker compose down -v
 docker compose up -d --build
 
-# Daftarkan ulang akun admin
+# Re-register an admin account
 curl -X POST http://localhost:8000/api/v1/auth/register \
   -H "Content-Type: application/json" \
   -d '{"name":"Admin","username":"admin","password":"admin123","role":"admin"}'
 ```
 
-### 📊 Quick Reference — Perintah Umum
+### 📊 Quick Reference — Common Commands
 
 ```bash
-# ✅ Update kode & rebuild (data aman)
+# ✅ Update code & rebuild (data safe)
 docker compose up -d --build
 
-# ✅ Stop semua (data aman)
+# ✅ Stop all services (data safe)
 docker compose down
 
-# ✅ Restart backend saja
+# ✅ Restart backend only
 docker compose restart backend
 
-# ✅ Lihat log backend
+# ✅ View backend logs
 docker compose logs -f backend
 
-# ✅ Lihat log semua service
+# ✅ View all service logs
 docker compose logs -f
 
-# ❌ RESET DATABASE (hapus semua data!)
+# ❌ RESET DATABASE (deletes all data!)
 ./scripts/reset-db.sh
 ```
 
@@ -669,6 +669,6 @@ This project is proprietary software. All rights reserved.
 
 **Built with ❤️ by Nadoyo**
 
-*LUMIÈRE — Where technology meets artisanal craft*
+*NADOYO — Where technology meets artisanal craft*
 
 </div>
