@@ -1,0 +1,77 @@
+services:
+  redis:
+    image: redis:7-alpine
+    container_name: cafe-redis
+    restart: always
+    environment:
+      TZ: Asia/Jakarta
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - cafe-network
+
+  postgres:
+    image: postgres:15-alpine
+    container_name: cafe-db
+    restart: always
+    environment:
+      TZ: Asia/Jakarta
+      POSTGRES_USER: cafe_user
+      POSTGRES_PASSWORD: cafe_secret
+      POSTGRES_DB: cafe_pos
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - cafe-network
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: cafe-backend
+    restart: always
+    ports:
+      - "8000:8000"
+    environment:
+      TZ: Asia/Jakarta
+      PORT: 8000
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_DATABASE: cafe_pos
+      DB_USER: cafe_user
+      DB_PASSWORD: cafe_secret
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      JWT_SECRET: lumiere_cafe_pos_jwt_secret_key_2026
+    depends_on:
+      - postgres
+      - redis
+    networks:
+      - cafe-network
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: cafe-frontend
+    restart: always
+    ports:
+      - "8080:80"
+    environment:
+      TZ: Asia/Jakarta
+    depends_on:
+      - backend
+    networks:
+      - cafe-network
+
+networks:
+  cafe-network:
+    driver: bridge
+
+volumes:
+  postgres_data:
+  redis_data:
