@@ -669,6 +669,9 @@ This project is proprietary software. All rights reserved.
 
 **Built with ❤️ by Nadoyo**
 
+🎨 UI/UX Design — [Google Stitch](https://stitch.withgoogle.com/)
+🤖 AI-Assisted Coding — [Google Antigravity](https://blog.google/technology/google-deepmind/antigravity-gem/)
+
 *NADOYO — Where technology meets artisanal craft*
 
 </div>

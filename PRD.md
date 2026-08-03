@@ -387,3 +387,12 @@ All major data queries are cached in Redis with configurable TTLs to minimise Po
 - Employee attendance & scheduling
 - Kitchen preparation time analytics
 - Mobile native app (React Native / Flutter)
+
+---
+
+## 12. Built With
+
+| Tool | Purpose |
+|------|---------|
+| [Google Stitch](https://stitch.withgoogle.com/) | UI/UX Design — wireframes, mockups, and visual design system |
+| [Google Antigravity](https://blog.google/technology/google-deepmind/antigravity-gem/) | AI-Assisted Coding — full-stack implementation, architecture, and debugging |
